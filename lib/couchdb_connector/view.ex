@@ -53,27 +53,6 @@ defmodule Couchdb.Connector.View do
     do: document_by_key(db_props, view_key)
 
   @doc """
-  Find and return one document with given key in given view. Will return a
-  JSON document with an empty list of documents if no document with given
-  key exists.
-  """
-  @spec document_by_key(Types.db_properties, Types.view_key)
-    :: {:ok, String.t} | {:error, String.t}
-  def document_by_key(db_props, view_key),
-    do: do_document_by_key(db_props, view_key)
-
-  @doc """
-  Find and return one document with given key in given view. Will return a
-  JSON document with an empty list of documents if no document with given
-  key exists.
-  Staleness is set to 'ok'.
-  """
-  @spec document_by_key(Types.db_properties, Types.view_key, :ok)
-    :: {:ok, String.t} | {:error, String.t}
-  def document_by_key(db_props, view_key, :ok),
-    do: do_document_by_key(db_props, view_key, :ok)
-
-  @doc """
   Find and return one document with given key in given view
   Will return a JSON document with an empty list of documents if no document
   with given key exists.
