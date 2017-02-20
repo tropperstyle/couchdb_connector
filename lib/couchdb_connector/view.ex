@@ -47,22 +47,20 @@ defmodule Couchdb.Connector.View do
   Find and return one document with given key in given view. Will return a
   JSON document with an empty list of documents if no document with given
   key exists.
-  Staleness is set to 'update_after'.
   """
   @spec document_by_key(Types.db_properties, Types.view_key) :: {:ok, String.t} | {:error, String.t}
   def document_by_key(db_props, view_key),
-    do: document_by_key(db_props, view_key, :update_after)
+    do: document_by_key(db_props, view_key)
 
   @doc """
   Find and return one document with given key in given view. Will return a
   JSON document with an empty list of documents if no document with given
   key exists.
-  Staleness is set to 'update_after'.
   """
-  @spec document_by_key(Types.db_properties, Types.view_key, :update_after)
+  @spec document_by_key(Types.db_properties, Types.view_key)
     :: {:ok, String.t} | {:error, String.t}
-  def document_by_key(db_props, view_key, :update_after),
-    do: do_document_by_key(db_props, view_key, :update_after)
+  def document_by_key(db_props, view_key),
+    do: do_document_by_key(db_props, view_key)
 
   @doc """
   Find and return one document with given key in given view. Will return a
@@ -76,17 +74,16 @@ defmodule Couchdb.Connector.View do
     do: do_document_by_key(db_props, view_key, :ok)
 
   @doc """
-  Find and return one document with given key in given view, using the given
-  staleness setting.
+  Find and return one document with given key in given view
   Will return a JSON document with an empty list of documents if no document
   with given key exists.
   """
-  @spec do_document_by_key(Types.db_properties, Types.view_key, :ok | :update_after)
+  @spec do_document_by_key(Types.db_properties, Types.view_key)
     :: {:ok, String.t} | {:error, String.t}
-  def do_document_by_key(db_props, view_key, stale) do
+  def do_document_by_key(db_props, view_key) do
     db_props
     |> UrlHelper.view_url(view_key[:design], view_key[:view])
-    |> UrlHelper.query_path(view_key[:key], stale)
+    |> UrlHelper.query_path(view_key[:key])
     |> do_document_by_key
   end
 

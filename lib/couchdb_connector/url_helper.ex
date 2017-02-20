@@ -71,19 +71,18 @@ defmodule Couchdb.Connector.UrlHelper do
 
   @doc """
   Produces the URL to query a view for a specific integer key, using the
-  provided staleness setting (either :ok or :update_after).
   """
-  @spec query_path(String.t, String.t, atom) :: String.t
-  def query_path(view_base_url, key, stale) when is_integer(key) do
-    "#{view_base_url}?key=#{URI.encode_www_form(Integer.to_string(key))}&stale=#{Atom.to_string(stale)}"
+  @spec query_path(String.t, String.t) :: String.t
+  def query_path(view_base_url, key) when is_integer(key) do
+    "#{view_base_url}?key=#{URI.encode_www_form(Integer.to_string(key))}"
   end
 
   @doc """
-  Produces the URL to query a view for a specific key, using the provided staleness setting (either :ok or :update_after).
+  Produces the URL to query a view for a specific key
   """
-  @spec query_path(String.t, String.t, atom) :: String.t
-  def query_path(view_base_url, key, stale) do
-    "#{view_base_url}?key=\"#{URI.encode_www_form(key)}\"&stale=#{Atom.to_string(stale)}"
+  @spec query_path(String.t, String.t) :: String.t
+  def query_path(view_base_url, key) do
+    "#{view_base_url}?key=\"#{URI.encode_www_form(key)}\""
   end
 
   @doc """
