@@ -105,15 +105,6 @@ defmodule Couchdb.Connector do
 
   @doc """
   Find and return one document with given key in given view. Will return a
-  a Map with an empty list of documents if no document with given
-  key exists.
-  """
-  @spec document_by_key(Types.db_properties, Types.view_key) :: {:ok, map} | {:error, map}
-  def document_by_key(db_props, view_key),
-    do: document_by_key(db_props, view_key)
-
-  @doc """
-  Find and return one document with given key in given view. Will return a
   Map with an empty list of documents if no document with given
   key exists.
   """
